@@ -1,18 +1,22 @@
-const FeedbackOptions = ({ options, onLeaveFeedback, onResetFeedback}) => {
+const FeedbackOptions = ({ options, onLeaveFeedback, onResetFeedback }) => {
+  const existReset = Object.values(options).some(option => !!option);
+
   return (
     <>
-      {Object.keys(options).map(s => (
+      {Object.keys(options).map(option => (
         <button
-          key={s}
+          key={option}
           style={{ margin: 5 }}
-          onClick={() => onLeaveFeedback(s)}
+          onClick={() => onLeaveFeedback(option)}
         >
-          <strong style={{ textTransform: 'capitalize' }}>{s}</strong>
+          <strong style={{ textTransform: 'capitalize' }}>{option}</strong>
         </button>
       ))}
-      <button onClick={onResetFeedback} style={{ margin: 5 }}>
-        <strong>Reset</strong>
-      </button>
+      {existReset && (
+        <button onClick={onResetFeedback} style={{ margin: 5 }}>
+          <strong>Reset</strong>
+        </button>
+      )}
     </>
   );
 }
